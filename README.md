@@ -1,49 +1,50 @@
 # 公积金智能客服系统
 
-第 1 步：装 SDK（在项目目录下）
+广州公积金个贷政策咨询问答。核心链路：文档/FAQ 导入 → 检索 → 带引用回答。
 
-  pip install openai
+## 目录说明
 
-  第 2 步：写 test_api.py（十几行，今晚的 commit）
+| 文件 / 目录 | 作用 |
+|---|---|
+| `faq.jsonl` | FAQ 知识库，每行一条 `{"q": 问题, "a": 答案, "src": 出处文件名}` |
+| `zcwj/` | 政策原文 PDF（FAQ 的提炼来源） |
+| `faq_demo.py` | 主程序：读 FAQ → 检索最相关 1 条 → 调模型带出处回答 |
+| `test_api.py` | API 连通性测试脚本 |
 
-  import os
-  from openai import OpenAI
+## 三步跑起来
 
-  client = OpenAI(
-      api_key=os.environ["ZHIPU_API_KEY"],   # 不把密钥写进代码，防止提交到仓库泄露
-      base_url="https://open.bigmodel.cn/api/paas/v4/"
-  )
+**第 1 步：装依赖（在项目目录下）**
 
-  resp = client.chat.completions.create(
-      model="glm-4.7-flash",                 # 免费模型
-      messages=[
-          {"role": "system", "content": "你是广州公积金客服助手，回答要准确、简洁。"},
-          {"role": "user", "content": "公积金个人住房贷款的利率是多少？"}
-      ]
-  )
+```
+pip install openai
+```
 
-  print(resp.choices[0].message.content)
+**第 2 步：设置密钥**
 
-  第 3 步：设置密钥后运行
+先到 bigmodel.cn 控制台注册并复制 API Key（不要写进代码，防止提交到仓库泄露）：
 
-  export ZHIPU_API_KEY="你从 bigmodel.cn 控制台复制的key"   # Git Bash / Linux 写法
-  python test_api.py
+```bash
+# Git Bash / Linux
+export ZHIPU_API_KEY="你的key"
+```
 
-  （如果用 Windows 的 PowerShell，则写 $env:ZHIPU_API_KEY="你的key"）
+```powershell
+# Windows PowerShell
+$env:ZHIPU_API_KEY="你的key"
+```
 
+**第 3 步：运行**
 
+```
+python faq_demo.py
+```
 
- 1. 导入：从 1-2 份 PDF 里手工提炼 10~20 条 FAQ，存成
-  faq.jsonl（每条：问题、答案、出处文件名）——手工提炼
-  2. 检索+引用： faq_demo.py：读 faq.jsonl →
-  关键词匹配挑出最相关的 3 条 → 拼进 prompt →
-  让模型回答时标注“依据：xxx通知”。跑起来问一句“我能贷多少”，看它带不带引用
-  3. README：写清楚三步——装什么、设什么环境变量、跑哪条命令。
-  第 1 步：装 SDK（在项目目录下）pip install openai
-  第 2 步： 
-  export ZHIPU_API_KEY="你从 bigmodel.cn 控制台复制的key"   # Git Bash / Linux 写法
-  $env:ZHIPU_API_KEY="你的key"  #PowerShell/Windows 写法
-  第 3 步：
-    python faq_demo.py
+输入问题（例如"我能贷多少"），程序会检索最相关的 FAQ 并让模型（glm-4.7-flash，免费）基于它回答，末尾注明依据的政策文件。检索不到相关政策时会直接提示。
 
+可先跑 `python test_api.py` 验证网络和密钥是否正常。
 
+## 当前状态
+
+- [x] FAQ 导入（已 4 条，目标 10~20 条，来源见 `zcwj/`）
+- [x] 检索 + 带引用回答（关键词字符重合度，取 top 1）
+- [ ] FAQ 补齐 + 检索效果优化（top 3）
