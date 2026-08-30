@@ -1,5 +1,6 @@
 import os
 import json
+import time
 from openai import OpenAI
 from retrieval import get_top3, format_refs
 
@@ -24,8 +25,12 @@ refs = get_top3(question, faqs)
 if not refs:
     print("抱歉，暂时没有查到相关政策")
 else:
+    t0 = time.time()
     resp = client.chat.completions.create(
-        model="glm-4.7-flash",
+        model="glm-4-plus",#glm-4-plus glm-4-flash
+        temperature=0.1, # 随机性，0~2，越低越稳定
+        #max_tokens=1024,# 回答最长多少 token
+        #timeout=30,   # 超时秒数
         messages=[
             {"role": "system", "content": (
                 "你是广州公积金客服助手。只能根据下面提供的参考资料回答，"
@@ -37,3 +42,4 @@ else:
         ]
     )
     print(resp.choices[0].message.content)
+    print(f"\n[{time.time() - t0:.1f} 秒]")
