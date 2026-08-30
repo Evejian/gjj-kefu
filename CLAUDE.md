@@ -10,8 +10,15 @@
 ## 技术边界
 - 语言 / 框架：Python 3，openai SDK
 - 模型：智谱 GLM（base_url = https://open.bigmodel.cn/api/paas/v4/），密钥只从环境变量 ZHIPU_API_KEY 读
+- 模型路由：日常调试 glm-4.7-flash（免费，约 4.8s），正式演示 glm-4-plus（约 1.8s）；超预算或限流就降级 flash，不换号硬刚
 - 数据：faq.jsonl，每行一条 {"q": 问题, "a": 答案, "src": 出处文件名}；政策原文 PDF 在 zcwj/
 - 禁止：提交密钥、改无关文件、跳过测试"先说做完了"
+
+## 目录约定与测试命令
+- 动手前先读 docs/CODEMAP.md（仓库地图）
+- 规格：docs/prd.md、docs/spec.md、docs/tasks.md；延后想法进 docs/backlog.md
+- 测试：`python test_retrieve.py`（必须全绿才算完成）
+- 主路径验收：`python faq_demo.py` 问"我能贷多少"，回答带出处
 
 ## 完成定义
 - 有测试或有可点击验收路径（至少：python 命令能跑通并输出预期结果）
