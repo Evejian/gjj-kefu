@@ -8,7 +8,9 @@
 |---|---|
 | `faq.jsonl` | FAQ 知识库，每行一条 `{"q": 问题, "a": 答案, "src": 出处文件名}` |
 | `zcwj/` | 政策原文 PDF（FAQ 的提炼来源） |
-| `faq_demo.py` | 主程序：读 FAQ → 检索最相关 1 条 → 调模型带出处回答 |
+| `faq_demo.py` | 主程序：读 FAQ → 检索最相关 3 条 → 调模型带出处回答 |
+| `retrieval.py` | 检索模块（打分 + top3，规格见 docs/spec.md） |
+| `test_retrieve.py` | 检索测试：`python test_retrieve.py` 全绿即通过 |
 | `test_api.py` | API 连通性测试脚本 |
 
 ## 三步跑起来
@@ -46,5 +48,5 @@ python faq_demo.py
 ## 当前状态
 
 - [x] FAQ 导入（已 4 条，目标 10~20 条，来源见 `zcwj/`）
-- [x] 检索 + 带引用回答（关键词字符重合度，取 top 1）
-- [ ] FAQ 补齐 + 检索效果优化（top 3）
+- [x] 检索 + 带引用回答（汉字/数字重合度打分，取 top 3，规格见 `docs/spec.md`）
+- [ ] FAQ 补齐（延后项见 `docs/backlog.md`）
