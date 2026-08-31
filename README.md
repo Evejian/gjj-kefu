@@ -47,6 +47,6 @@ python faq_demo.py
 
 ## 当前状态
 
-- [x] FAQ 导入（已 4 条，目标 10~20 条，来源见 `zcwj/`）
+- [x] FAQ 导入（已 17 条，覆盖额度/首付/绿色建筑/生育支持/提取/商转公，来源见 `zcwj/`）
 - [x] 检索 + 带引用回答（汉字/数字重合度打分，取 top 3，规格见 `docs/spec.md`）
-- [ ] FAQ 补齐（延后项见 `docs/backlog.md`）
+- [x] FAQ 补齐（已到 17 条；弱匹配拒答阈值 MIN_SCORE=4）

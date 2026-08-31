@@ -19,15 +19,18 @@ def check(name, cond):
 # UC-01 贷款额度问题应召回最高额度那条
 top = get_top3("公积金个人住房贷款最高能贷多少", FAQS)
 check("UC-01 top1 是最高额度那条",
-      bool(top) and "最高额度" in top[0]["src"])
+      bool(top) and "100万元" in top[0]["a"])
 
 # UC-02 二孩问题应召回二孩政策那条
 top = get_top3("二孩家庭额度能上浮吗", FAQS)
 check("UC-02 top1 是二孩政策那条",
-      bool(top) and "二孩" in top[0]["src"])
+      bool(top) and "上浮40%" in top[0]["a"])
 
 # UC-03 无关问题返回空列表（失败态）
 check("UC-03 无关问题返回空", get_top3("今天天气怎么样", FAQS) == [])
+
+# UC-03b 弱匹配（仅撞一两个常见字，如"什么"）也拒答
+check("UC-03b 弱匹配返回空", get_top3("这个政策怎么申请", FAQS) == [])
 
 # UC-04 标点不计分
 check("UC-04 纯标点得 0 分", score("？？？!!!", {"q": "公积金贷款？额度！"}) == 0)
