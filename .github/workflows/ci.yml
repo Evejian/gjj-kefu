@@ -29,10 +29,11 @@ jobs:
             git ls-files | grep -E '(^|/)\.env($|\.)' || true
             exit 1
           fi
+          # 只拦「看起来像真 key」的赋值；README 里 ZHIPU_API_KEY="你的key" 这类占位不报
           if grep -RInE --exclude-dir=.git --exclude-dir=.github \
-            -e 'ZHIPU_API_KEY\s*=\s*["'\''][^"'\'']+["'\'']' \
-            -e 'api[_-]?key\s*=\s*["'\''][a-zA-Z0-9_\-]{16,}["'\'']' \
-            -e 'sk-[a-zA-Z0-9]{20,}' \
+            -e 'ZHIPU_API_KEY\s*=\s*["'\''][A-Za-z0-9_\.\-]{16,}["'\'']' \
+            -e 'api[_-]?key\s*=\s*["'\''][A-Za-z0-9_\.\-]{16,}["'\'']' \
+            -e 'sk-[A-Za-z0-9]{20,}' \
             . ; then
             echo "拒绝：疑似密钥硬编码"
             exit 1
