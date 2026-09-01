@@ -12,6 +12,8 @@
 | `retrieval.py` | 检索模块（打分 + top3，规格见 docs/spec.md） |
 | `test_retrieve.py` | 检索测试：`python test_retrieve.py` 全绿即通过 |
 | `test_api.py` | API 连通性测试脚本 |
+| `TEAM.md` | 团队 AI 编程公约（规格目录 / Ready / 密钥 / PR / CI） |
+| `.github/` | PR 模板 + CI（检索测试 + 密钥扫描） |
 
 ## 三步跑起来
 
@@ -50,3 +52,8 @@ python faq_demo.py
 - [x] FAQ 导入（已 17 条，覆盖额度/首付/绿色建筑/生育支持/提取/商转公，来源见 `zcwj/`）
 - [x] 检索 + 带引用回答（汉字/数字重合度打分，取 top 3，规格见 `docs/spec.md`）
 - [x] FAQ 补齐（已到 17 条；弱匹配拒答阈值 MIN_SCORE=4）
+- [x] 团队落地（L4）：`TEAM.md` + PR 模板含 Agent 贡献说明 + CI 跑测试与密钥扫描
+
+## 协作（团队）
+
+新人先读 `TEAM.md`。开 PR 会自动套用模板；合并前 CI 必须绿。组员不必使用同一 Agent 产品，但规格路径、测试命令、密钥规则、PR 四栏不可省。

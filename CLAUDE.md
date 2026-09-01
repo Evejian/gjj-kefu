@@ -17,7 +17,8 @@
 ## 目录约定与测试命令
 - 动手前先读 docs/CODEMAP.md（仓库地图）
 - 规格：docs/prd.md、docs/spec.md、docs/tasks.md；延后想法进 docs/backlog.md
-- 测试：`python test_retrieve.py`（必须全绿才算完成）
+- 团队公约：TEAM.md（规格目录 / Ready / 密钥 / PR / CI；不绑定单一 Agent 厂商）
+- 测试：`python test_retrieve.py`（必须全绿才算完成）；PR 由 GitHub Actions 再跑一遍
 - 主路径验收：`python faq_demo.py` 问"我能贷多少"，回答带出处
 
 ## 完成定义
