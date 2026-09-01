@@ -1,0 +1,40 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run retrieval tests
+        run: python test_retrieve.py
+
+  secret-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Block committed secrets
+        run: |
+          set -e
+          # 拦常见泄露形态：赋值进仓库的智谱 key、sk- 长串、.env 内容文件
+          if git ls-files | grep -E '(^|/)\.env($|\.)'; then
+            echo "拒绝：仓库中不应跟踪 .env 文件"
+            git ls-files | grep -E '(^|/)\.env($|\.)' || true
+            exit 1
+          fi
+          if grep -RInE --exclude-dir=.git --exclude-dir=.github \
+            -e 'ZHIPU_API_KEY\s*=\s*["'\''][^"'\'']+["'\'']' \
+            -e 'api[_-]?key\s*=\s*["'\''][a-zA-Z0-9_\-]{16,}["'\'']' \
+            -e 'sk-[a-zA-Z0-9]{20,}' \
+            . ; then
+            echo "拒绝：疑似密钥硬编码"
+            exit 1
+          fi
+          echo "密钥扫描通过"
