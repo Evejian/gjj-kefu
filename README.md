@@ -2,58 +2,42 @@
 
 广州公积金个贷政策咨询问答。核心链路：文档/FAQ 导入 → 检索 → 带引用回答。
 
+## 5 分钟跑通（新人路径）
+
+```bash
+pip install openai
+python test_retrieve.py      # 检索 8/8
+python test_main_path.py     # 主路径状态机 4/4
+python demo_main_path.py     # 无交互：成功 / 拒答 / API失败 三态
+```
+
+不需要密钥即可看完主路径。有密钥后再交互体验真实模型：
+
+```powershell
+$env:ZHIPU_API_KEY="你的key"   # bigmodel.cn 控制台复制，勿写入仓库
+python faq_demo.py             # 问「我能贷多少」→ 带出处；无关问题拒答
+```
+
 ## 目录说明
 
 | 文件 / 目录 | 作用 |
 |---|---|
 | `faq.jsonl` | FAQ 知识库，每行一条 `{"q": 问题, "a": 答案, "src": 出处文件名}` |
 | `zcwj/` | 政策原文 PDF（FAQ 的提炼来源） |
-| `faq_demo.py` | 主程序：读 FAQ → 检索最相关 3 条 → 调模型带出处回答 |
+| `answer.py` | 问答状态机：拒答 / mock作答 / live / 缺密钥 / API失败 |
+| `demo_main_path.py` | 非交互演示三态（对应 L5「成功+失败可恢复」） |
+| `faq_demo.py` | 交互入口：有密钥走 live，否则自动 mock |
 | `retrieval.py` | 检索模块（打分 + top3，规格见 docs/spec.md） |
-| `test_retrieve.py` | 检索测试：`python test_retrieve.py` 全绿即通过 |
-| `test_api.py` | API 连通性测试脚本 |
-| `TEAM.md` | 团队 AI 编程公约（规格目录 / Ready / 密钥 / PR / CI） |
-| `.github/` | PR 模板 + CI（检索测试 + 密钥扫描） |
-
-## 三步跑起来
-
-**第 1 步：装依赖（在项目目录下）**
-
-```
-pip install openai
-```
-
-**第 2 步：设置密钥**
-
-先到 bigmodel.cn 控制台注册并复制 API Key（不要写进代码，防止提交到仓库泄露）：
-
-```bash
-# Git Bash / Linux
-export ZHIPU_API_KEY="你的key"
-```
-
-```powershell
-# Windows PowerShell
-$env:ZHIPU_API_KEY="你的key"
-```
-
-**第 3 步：运行**
-
-```
-python faq_demo.py
-```
-
-输入问题（例如"我能贷多少"），程序会检索最相关的 FAQ 并让模型（glm-4.7-flash，免费）基于它回答，末尾注明依据的政策文件。检索不到相关政策时会直接提示。
-
-可先跑 `python test_api.py` 验证网络和密钥是否正常。
+| `test_retrieve.py` / `test_main_path.py` | 检索与主路径测试 |
+| `TEAM.md` | 团队 AI 编程公约 |
+| `.github/` | PR 模板 + CI |
 
 ## 当前状态
 
-- [x] FAQ 导入（已 17 条，覆盖额度/首付/绿色建筑/生育支持/提取/商转公，来源见 `zcwj/`）
-- [x] 检索 + 带引用回答（汉字/数字重合度打分，取 top 3，规格见 `docs/spec.md`）
-- [x] FAQ 补齐（已到 17 条；弱匹配拒答阈值 MIN_SCORE=4）
-- [x] 团队落地（L4）：`TEAM.md` + PR 模板含 Agent 贡献说明 + CI 跑测试与密钥扫描
+- [x] FAQ 17 条 + 检索 top3 + 弱匹配拒答（MIN_SCORE=4）
+- [x] 团队落地（L4）：TEAM.md + PR 模板 + CI
+- [x] 主路径可演示（Day6/L5 适配）：状态机 + mock 成功/拒答/API失败，无密钥也能验收
 
 ## 协作（团队）
 
-新人先读 `TEAM.md`。开 PR 会自动套用模板；合并前 CI 必须绿。组员不必使用同一 Agent 产品，但规格路径、测试命令、密钥规则、PR 四栏不可省。
+新人先读 `TEAM.md`。开 PR 会自动套用模板；合并前 CI 必须绿。规格见 `docs/prd-main-path.md` / `docs/spec-main-path.md`。

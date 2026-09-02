@@ -15,6 +15,10 @@ jobs:
           python-version: "3.12"
       - name: Run retrieval tests
         run: python test_retrieve.py
+      - name: Run main-path tests
+        run: python test_main_path.py
+      - name: Demo three states (no secrets needed)
+        run: python demo_main_path.py
 
   secret-scan:
     runs-on: ubuntu-latest

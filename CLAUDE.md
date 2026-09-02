@@ -18,8 +18,9 @@
 - 动手前先读 docs/CODEMAP.md（仓库地图）
 - 规格：docs/prd.md、docs/spec.md、docs/tasks.md；延后想法进 docs/backlog.md
 - 团队公约：TEAM.md（规格目录 / Ready / 密钥 / PR / CI；不绑定单一 Agent 厂商）
-- 测试：`python test_retrieve.py`（必须全绿才算完成）；PR 由 GitHub Actions 再跑一遍
-- 主路径验收：`python faq_demo.py` 问"我能贷多少"，回答带出处
+- 测试：`python test_retrieve.py` 与 `python test_main_path.py`（必须全绿）；PR 由 GitHub Actions 再跑一遍
+- 主路径验收：`python demo_main_path.py` 三态通过；有密钥时 `python faq_demo.py` 问"我能贷多少"，回答带出处
+- 主路径规格：docs/prd-main-path.md、docs/spec-main-path.md、docs/tasks-main-path.md
 
 ## 完成定义
 - 有测试或有可点击验收路径（至少：python 命令能跑通并输出预期结果）
