@@ -17,8 +17,14 @@ jobs:
         run: python test_retrieve.py
       - name: Run main-path tests
         run: python test_main_path.py
+      - name: Run characterization tests
+        run: python test_characterization.py
+      - name: Run faq_stats tests
+        run: python test_faq_stats.py
       - name: Demo three states (no secrets needed)
         run: python demo_main_path.py
+      - name: FAQ stats smoke
+        run: python faq_stats.py
 
   secret-scan:
     runs-on: ubuntu-latest

@@ -4,40 +4,44 @@
 
 ## 5 分钟跑通（新人路径）
 
+先读 [`docs/wiki/`](docs/wiki/)（启动 / 入口 / 数据 / 雷区）。然后：
+
 ```bash
 pip install openai
-python test_retrieve.py      # 检索 8/8
-python test_main_path.py     # 主路径状态机 4/4
-python demo_main_path.py     # 无交互：成功 / 拒答 / API失败 三态
+python test_retrieve.py
+python test_main_path.py
+python test_characterization.py
+python test_faq_stats.py
+python demo_main_path.py
+python faq_stats.py
 ```
 
-不需要密钥即可看完主路径。有密钥后再交互体验真实模型：
+不需要密钥即可验收。有密钥后再交互：
 
 ```powershell
-$env:ZHIPU_API_KEY="你的key"   # bigmodel.cn 控制台复制，勿写入仓库
-python faq_demo.py             # 问「我能贷多少」→ 带出处；无关问题拒答
+$env:ZHIPU_API_KEY="你的key"   # bigmodel.cn，勿写入仓库
+python faq_demo.py
 ```
 
 ## 目录说明
 
 | 文件 / 目录 | 作用 |
 |---|---|
-| `faq.jsonl` | FAQ 知识库，每行一条 `{"q": 问题, "a": 答案, "src": 出处文件名}` |
-| `zcwj/` | 政策原文 PDF（FAQ 的提炼来源） |
-| `answer.py` | 问答状态机：拒答 / mock作答 / live / 缺密钥 / API失败 |
-| `demo_main_path.py` | 非交互演示三态（对应 L5「成功+失败可恢复」） |
-| `faq_demo.py` | 交互入口：有密钥走 live，否则自动 mock |
-| `retrieval.py` | 检索模块（打分 + top3，规格见 docs/spec.md） |
-| `test_retrieve.py` / `test_main_path.py` | 检索与主路径测试 |
-| `TEAM.md` | 团队 AI 编程公约 |
-| `.github/` | PR 模板 + CI |
+| `docs/wiki/` | 接手说明（L6）：如何启动、入口、数据、不敢动清单 |
+| `faq_store.py` | FAQ 唯一读取入口 |
+| `faq_stats.py` | 只读：按来源统计 FAQ |
+| `faq.jsonl` / `zcwj/` | 知识库与政策原文 |
+| `retrieval.py` / `answer.py` | 检索 + 问答状态机 |
+| `demo_main_path.py` / `faq_demo.py` | 非交互演示 / 交互入口 |
+| `test_*.py` | 检索、主路径、表征、统计 |
+| `TEAM.md` / `.github/` | 团队公约 + CI |
 
 ## 当前状态
 
-- [x] FAQ 17 条 + 检索 top3 + 弱匹配拒答（MIN_SCORE=4）
-- [x] 团队落地（L4）：TEAM.md + PR 模板 + CI
-- [x] 主路径可演示（Day6/L5 适配）：状态机 + mock 成功/拒答/API失败，无密钥也能验收
+- [x] FAQ 17 条 + 检索 top3 + 弱匹配拒答
+- [x] 团队落地（L4）+ 主路径三态演示（L5 适配）
+- [x] 祖传迭代流程（Day7/L6）：Wiki + 表征测试 + `faq_store` 去重重构 + 只读 `faq_stats`
 
-## 协作（团队）
+## 协作
 
-新人先读 `TEAM.md`。开 PR 会自动套用模板；合并前 CI 必须绿。规格见 `docs/prd-main-path.md` / `docs/spec-main-path.md`。
+新人：`docs/wiki/` → `TEAM.md` → 开 PR。改打分/阈值前先看「不敢动清单」。
