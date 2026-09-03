@@ -1,11 +1,6 @@
-import json
 import os
 from answer import answer
-
-
-def load_faqs():
-    with open("faq.jsonl", encoding="utf-8") as f:
-        return [json.loads(line) for line in f if line.strip()]
+from faq_store import load_faqs
 
 
 FAQS = load_faqs()
