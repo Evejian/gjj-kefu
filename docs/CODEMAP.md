@@ -16,9 +16,10 @@ gjj-kefu/
 ├── answer.py            # 问答状态机
 ├── demo_main_path.py / faq_demo.py
 ├── test_retrieve.py / test_main_path.py
-├── test_characterization.py / test_faq_stats.py
-├── docs/wiki/           # L6 Repo Wiki
-├── docs/*-main-path.md / docs/prd|spec|tasks|backlog|ten-x.md
+├── agent.py / intent.py / auth.py / ratelimit.py
+├── order_tool.py / ticket_store.py / demo_agent.py / eval_run.py
+├── data/users.json / data/orders.json   # 演示鉴权+假订单
+├── docs/eval-set.jsonl / docs/escalation-policy.md / docs/*-agent.md
 ├── .github/             # PR 模板 + CI
 └── .claude/             # Harness
 ```
@@ -30,7 +31,7 @@ gjj-kefu/
 | 检索逻辑 / 打分规则 | 先扩 test_characterization.py，再改 retrieval.py |
 | 问答状态 | answer.py + test_main_path.py |
 | 读 FAQ | 只改 faq_store.py |
-| 只读统计 | faq_stats.py（勿塞进 answer） |
+| Agent 值守 | agent.py + test_agent.py + demo_agent.py |
 | 加 FAQ | faq.jsonl，对照 zcwj/ |
 | 接手知识 | docs/wiki/ 与本文件一起改 |
 
@@ -38,6 +39,6 @@ gjj-kefu/
 
 ```
 pip install openai
-python test_retrieve.py && python test_main_path.py && python test_characterization.py && python test_faq_stats.py
-python demo_main_path.py && python faq_stats.py
+python test_retrieve.py && python test_main_path.py && python test_characterization.py && python test_faq_stats.py && python test_agent.py
+python demo_main_path.py && python demo_agent.py && python eval_run.py
 ```

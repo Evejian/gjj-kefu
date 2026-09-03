@@ -21,8 +21,14 @@ jobs:
         run: python test_characterization.py
       - name: Run faq_stats tests
         run: python test_faq_stats.py
+      - name: Run agent tests
+        run: python test_agent.py
+      - name: Run eval set
+        run: python eval_run.py
       - name: Demo three states (no secrets needed)
         run: python demo_main_path.py
+      - name: Demo agent routing
+        run: python demo_agent.py
       - name: FAQ stats smoke
         run: python faq_stats.py
 

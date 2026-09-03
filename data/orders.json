@@ -1,0 +1,16 @@
+[
+  {
+    "user_id": "U001",
+    "application_id": "LA2026001",
+    "status": "审批中",
+    "amount": "80万元",
+    "updated_at": "2026-08-20"
+  },
+  {
+    "user_id": "U002",
+    "application_id": "LA2026002",
+    "status": "已放款",
+    "amount": "120万元",
+    "updated_at": "2026-07-15"
+  }
+]

@@ -1,47 +1,38 @@
 # 公积金智能客服系统
 
-广州公积金个贷政策咨询问答。核心链路：文档/FAQ 导入 → 检索 → 带引用回答。
+广州公积金个贷政策咨询问答。核心链路：FAQ → 检索 → 带引用回答；**Agent 值守**（Day8）再加意图路由、Tool、转人工、限额。
 
-## 5 分钟跑通（新人路径）
+## 5 分钟跑通
 
-先读 [`docs/wiki/`](docs/wiki/)（启动 / 入口 / 数据 / 雷区）。然后：
+先读 [`docs/wiki/`](docs/wiki/)。然后：
 
 ```bash
 pip install openai
-python test_retrieve.py
-python test_main_path.py
-python test_characterization.py
-python test_faq_stats.py
-python demo_main_path.py
-python faq_stats.py
+python test_retrieve.py && python test_main_path.py && python test_characterization.py
+python test_faq_stats.py && python test_agent.py
+python demo_main_path.py && python demo_agent.py
+python eval_run.py          # 评估集 20 条，诚实公布分数
 ```
 
-不需要密钥即可验收。有密钥后再交互：
+演示 token：`demo-user-1`（查贷款进度）。转人工政策见 [`docs/escalation-policy.md`](docs/escalation-policy.md)。
 
-```powershell
-$env:ZHIPU_API_KEY="你的key"   # bigmodel.cn，勿写入仓库
-python faq_demo.py
-```
+有密钥：`python faq_demo.py`（交互，auto 模式）。
 
-## 目录说明
+## 目录（摘要）
 
-| 文件 / 目录 | 作用 |
-|---|---|
-| `docs/wiki/` | 接手说明（L6）：如何启动、入口、数据、不敢动清单 |
-| `faq_store.py` | FAQ 唯一读取入口 |
-| `faq_stats.py` | 只读：按来源统计 FAQ |
-| `faq.jsonl` / `zcwj/` | 知识库与政策原文 |
-| `retrieval.py` / `answer.py` | 检索 + 问答状态机 |
-| `demo_main_path.py` / `faq_demo.py` | 非交互演示 / 交互入口 |
-| `test_*.py` | 检索、主路径、表征、统计 |
-| `TEAM.md` / `.github/` | 团队公约 + CI |
+| 路径 | 作用 |
+|------|------|
+| `agent.py` + `intent/auth/ratelimit/order_tool/ticket_store` | 值守编排 |
+| `data/users.json` / `data/orders.json` | 演示鉴权与假订单 API |
+| `docs/eval-set.jsonl` + `eval_run.py` | 20 条评估 |
+| `docs/spec-agent.md` | Agent 规格 |
+| `retrieval.py` / `answer.py` | RAG 心脏（表征测试保护） |
 
 ## 当前状态
 
-- [x] FAQ 17 条 + 检索 top3 + 弱匹配拒答
-- [x] 团队落地（L4）+ 主路径三态演示（L5 适配）
-- [x] 祖传迭代流程（Day7/L6）：Wiki + 表征测试 + `faq_store` 去重重构 + 只读 `faq_stats`
+- [x] L4 团队公约 + L5 主路径 + L6 Wiki/表征
+- [x] **Day8 / L7**：意图(policy/loan/escalate) + Tool + 工单 + 限额 + 评估集
 
 ## 协作
 
-新人：`docs/wiki/` → `TEAM.md` → 开 PR。改打分/阈值前先看「不敢动清单」。
+`docs/wiki/` → `TEAM.md` → PR。改 `retrieval.py` 前先看不敢动清单。

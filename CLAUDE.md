@@ -18,9 +18,9 @@
 - 动手前先读 docs/wiki/ 与 docs/CODEMAP.md
 - 规格：docs/prd.md、docs/spec.md、docs/tasks.md；延后想法进 docs/backlog.md
 - 团队公约：TEAM.md（规格目录 / Ready / 密钥 / PR / CI；不绑定单一 Agent 厂商）
-- 测试：`python test_retrieve.py`、`test_main_path.py`、`test_characterization.py`、`test_faq_stats.py`（必须全绿）
-- 主路径验收：`python demo_main_path.py`；只读统计：`python faq_stats.py`
-- 主路径规格：docs/prd-main-path.md、docs/spec-main-path.md、docs/tasks-main-path.md
+- 测试：`python test_retrieve.py`、`test_main_path.py`、`test_characterization.py`、`test_faq_stats.py`、`test_agent.py`（必须全绿）；评估：`python eval_run.py`
+- 主路径：`python demo_main_path.py`；**Agent 值守**：`python demo_agent.py`
+- Agent 规格：docs/prd-agent.md、docs/spec-agent.md、docs/tasks-agent.md；转人工：docs/escalation-policy.md
 - 不敢动区域：见 docs/wiki/04-landmines.md（无表征测试不改 retrieval 心脏）
 
 ## 完成定义
