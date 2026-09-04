@@ -19,9 +19,9 @@
 - 规格：docs/prd.md、docs/spec.md、docs/tasks.md；延后想法进 docs/backlog.md
 - 团队公约：TEAM.md（规格目录 / Ready / 密钥 / PR / CI；不绑定单一 Agent 厂商）
 - 测试：`python scripts/gate_ready.py`（必须全绿）；评估：`python eval_run.py`
-- 主路径：`python demo_main_path.py`；**Agent 值守**：`python demo_agent.py`
+- 主路径：`python demo_main_path.py`；Agent：`python demo_agent.py`；**商业闭环**：`python demo_saas.py`
+- SaaS 规格：docs/prd-saas.md、docs/spec-saas.md（含成本核算与 GJJ_KILL_SWITCH）
 - Issue→PR：`docs/delivery-pipeline.md`、`/fix-issue`（自动化等级 ≤ 1，人合并）
-- Agent 规格：docs/prd-agent.md、docs/spec-agent.md、docs/tasks-agent.md；转人工：docs/escalation-policy.md
 - 不敢动区域：见 docs/wiki/04-landmines.md（无表征测试不改 retrieval 心脏）
 - **禁止**：测试未绿声称完成；Agent 自行合并 main / 自动部署生产
 

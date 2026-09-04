@@ -3,3 +3,4 @@ __pycache__/
 .env.*
 !.env.example
 data/tickets.json
+data/billing.json
