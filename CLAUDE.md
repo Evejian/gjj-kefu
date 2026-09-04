@@ -18,10 +18,12 @@
 - 动手前先读 docs/wiki/ 与 docs/CODEMAP.md
 - 规格：docs/prd.md、docs/spec.md、docs/tasks.md；延后想法进 docs/backlog.md
 - 团队公约：TEAM.md（规格目录 / Ready / 密钥 / PR / CI；不绑定单一 Agent 厂商）
-- 测试：`python test_retrieve.py`、`test_main_path.py`、`test_characterization.py`、`test_faq_stats.py`、`test_agent.py`（必须全绿）；评估：`python eval_run.py`
+- 测试：`python scripts/gate_ready.py`（必须全绿）；评估：`python eval_run.py`
 - 主路径：`python demo_main_path.py`；**Agent 值守**：`python demo_agent.py`
+- Issue→PR：`docs/delivery-pipeline.md`、`/fix-issue`（自动化等级 ≤ 1，人合并）
 - Agent 规格：docs/prd-agent.md、docs/spec-agent.md、docs/tasks-agent.md；转人工：docs/escalation-policy.md
 - 不敢动区域：见 docs/wiki/04-landmines.md（无表征测试不改 retrieval 心脏）
+- **禁止**：测试未绿声称完成；Agent 自行合并 main / 自动部署生产
 
 ## 完成定义
 - 有测试或有可点击验收路径（至少：python 命令能跑通并输出预期结果）

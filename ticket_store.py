@@ -11,8 +11,14 @@ def _load(path):
     p = Path(path)
     if not p.exists():
         return []
-    with p.open(encoding="utf-8") as f:
-        return json.load(f)
+    try:
+        with p.open(encoding="utf-8") as f:
+            data = json.load(f)
+    except (json.JSONDecodeError, OSError):
+        return []
+    if not isinstance(data, list):
+        return []
+    return data
 
 
 def _save(path, items):

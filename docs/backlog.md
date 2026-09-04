@@ -6,6 +6,9 @@
 - Web 界面 / 多轮对话 / 语音：非目标，延后
 - 真工单系统 / MCP / 向量检索：见 backlog
 
+## 已闭环（2026-09-04）
+- ~~Issue→PR L8~~：fix-issue skill、gate_ready、tickets 容错、Issue 0001 失败日志
+
 ## 已闭环（2026-09-03）
 - ~~Agent 值守 L7~~：意图路由 + 假订单 Tool + tickets + 限额 + eval-set 20 条
 

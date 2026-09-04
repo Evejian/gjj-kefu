@@ -1,44 +1,38 @@
 # 仓库地图（CODEMAP）
 
-公积金智能客服：个贷政策问答。核心链路 = FAQ 导入 → 检索 top3 → 带引用回答。
+公积金智能客服：FAQ → 检索 top3 → 回答；Agent 值守；Issue→PR 流水线。
 
-接手说明（启动/雷区/不敢动）见 [`wiki/`](wiki/)。
+接手说明见 [`wiki/`](wiki/)。交付流水线见 [`delivery-pipeline.md`](delivery-pipeline.md)。
 
 ## 目录结构
 
 ```
 gjj-kefu/
 ├── CLAUDE.md / TEAM.md / README.md / camp-goals.md
-├── faq.jsonl / zcwj/
-├── faq_store.py         # FAQ 唯一读取
-├── faq_stats.py         # 只读统计（安全区）
-├── retrieval.py         # 检索打分 top3
-├── answer.py            # 问答状态机
-├── demo_main_path.py / faq_demo.py
-├── test_retrieve.py / test_main_path.py
-├── agent.py / intent.py / auth.py / ratelimit.py
-├── order_tool.py / ticket_store.py / demo_agent.py / eval_run.py
-├── data/users.json / data/orders.json   # 演示鉴权+假订单
-├── docs/eval-set.jsonl / docs/escalation-policy.md / docs/*-agent.md
-├── .github/             # PR 模板 + CI
-└── .claude/             # Harness
+├── faq_store.py / faq_stats.py / retrieval.py / answer.py
+├── agent.py / intent.py / auth.py / ratelimit.py / order_tool.py / ticket_store.py
+├── demo_*.py / eval_run.py / scripts/gate_ready.py
+├── test_*.py
+├── data/users.json / data/orders.json
+├── docs/wiki/ / docs/issues/ / docs/delivery-pipeline.md
+├── docs/*-agent.md / docs/eval-set.jsonl / docs/escalation-policy.md
+├── .github/ISSUE_TEMPLATE/ / workflows/ci.yml
+└── .claude/skills/fix-issue / commands/fix-issue / ready
 ```
 
 ## 改动从哪下手
 
 | 要改什么 | 入口 |
 |---|---|
-| 检索逻辑 / 打分规则 | 先扩 test_characterization.py，再改 retrieval.py |
-| 问答状态 | answer.py + test_main_path.py |
-| 读 FAQ | 只改 faq_store.py |
-| Agent 值守 | agent.py + test_agent.py + demo_agent.py |
-| 加 FAQ | faq.jsonl，对照 zcwj/ |
-| 接手知识 | docs/wiki/ 与本文件一起改 |
+| 检索 / 打分 | test_characterization → retrieval.py |
+| 工单容错 | test_ticket_store → ticket_store.py |
+| Agent 值守 | agent.py + test_agent.py |
+| 修 Issue | docs/issues/ + /fix-issue |
+| 门禁 | scripts/gate_ready.py |
 
 ## 怎么跑
 
 ```
-pip install openai
-python test_retrieve.py && python test_main_path.py && python test_characterization.py && python test_faq_stats.py && python test_agent.py
+python scripts/gate_ready.py
 python demo_main_path.py && python demo_agent.py && python eval_run.py
 ```

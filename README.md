@@ -1,6 +1,6 @@
 # 公积金智能客服系统
 
-广州公积金个贷政策咨询问答。核心链路：FAQ → 检索 → 带引用回答；**Agent 值守**（Day8）再加意图路由、Tool、转人工、限额。
+广州公积金个贷政策咨询问答。核心链路：FAQ → 检索 → 带引用回答；Agent 值守；**Issue→PR 流水线**（Day9/L8）。
 
 ## 5 分钟跑通
 
@@ -8,31 +8,29 @@
 
 ```bash
 pip install openai
-python test_retrieve.py && python test_main_path.py && python test_characterization.py
-python test_faq_stats.py && python test_agent.py
+python scripts/gate_ready.py    # 全量测试门禁
 python demo_main_path.py && python demo_agent.py
-python eval_run.py          # 评估集 20 条，诚实公布分数
+python eval_run.py              # 评估 20 条
 ```
 
-演示 token：`demo-user-1`（查贷款进度）。转人工政策见 [`docs/escalation-policy.md`](docs/escalation-policy.md)。
-
-有密钥：`python faq_demo.py`（交互，auto 模式）。
+演示 token：`demo-user-1`。转人工：[`docs/escalation-policy.md`](docs/escalation-policy.md)。  
+修 bug：[`docs/delivery-pipeline.md`](docs/delivery-pipeline.md) 或 `/fix-issue 0001`。
 
 ## 目录（摘要）
 
 | 路径 | 作用 |
 |------|------|
-| `agent.py` + `intent/auth/ratelimit/order_tool/ticket_store` | 值守编排 |
-| `data/users.json` / `data/orders.json` | 演示鉴权与假订单 API |
-| `docs/eval-set.jsonl` + `eval_run.py` | 20 条评估 |
-| `docs/spec-agent.md` | Agent 规格 |
-| `retrieval.py` / `answer.py` | RAG 心脏（表征测试保护） |
+| `scripts/gate_ready.py` | 测试红禁止 Ready |
+| `docs/issues/` + `.github/ISSUE_TEMPLATE/` | Issue 进仓库 |
+| `.claude/skills/fix-issue` | Issue→复现→红测→修→PR |
+| `agent.py` 等 | 值守编排 |
+| `retrieval.py` / `answer.py` | RAG 心脏（表征保护） |
 
 ## 当前状态
 
-- [x] L4 团队公约 + L5 主路径 + L6 Wiki/表征
-- [x] **Day8 / L7**：意图(policy/loan/escalate) + Tool + 工单 + 限额 + 评估集
+- [x] L4–L7：公约 / 主路径 / Wiki / Agent 值守
+- [x] **Day9 / L8**：Issue 模板 + fix-issue + 门禁 + 已知 bug 0001（tickets 容错）+ 失败日志；自动化等级 ≤ 1
 
 ## 协作
 
-`docs/wiki/` → `TEAM.md` → PR。改 `retrieval.py` 前先看不敢动清单。
+`TEAM.md`（含自动化分级）→ PR 由人合并。改检索前看不敢动清单。
