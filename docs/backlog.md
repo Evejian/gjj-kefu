@@ -8,6 +8,7 @@
 
 ## 已闭环（2026-09-05）
 - ~~结营 L10~~：三份资产 `docs/camp-retro.md`；目标对照 `camp-goals.md`；`demo_wrap.py`
+- ~~营外 Day12 L4 试行包~~：`docs/l4-trial.md`；一周结果待 09-12 回写
 
 ## 已闭环（2026-09-04）
 - ~~SaaS 最小商业闭环 L9~~：注册赠次、扣次问答、付费墙、假支付、kill switch、成本核算
