@@ -22,7 +22,7 @@
 | 修图 Web / 真 Stripe | **放弃** | 写进非目标；用政策问答 CLI 打通同一故事 |
 | Harness：Skill + Hook | **达成** | 3+ Skill、`/ready`、reviewer、`.env` Hook |
 | MCP 至少一个连接 | **放弃** | 无真实外部系统需求；不为 MCP 而 MCP |
-| GitHub day8–10 远程 | **部分达成** | 本地已提交；443 重置时未强推 |
+| GitHub day8–10 远程 | **部分达成** | Day14 按模板开 PR；合不合并由人决定 |
 
 ## 30 天后（营外，选一条）
 
@@ -30,7 +30,7 @@
 不选真收款、不选接真实 Issue 池（本阶段无生产合并权）。
 
 - **试行周**：2026-09-05 ~ 2026-09-11（Day12 已交试行包 `docs/l4-trial.md` / `python demo_trial.py`）
-- **本日证据**：Day13 规格 `docs/prd-cost.md`；mock 成本入账 0（`python demo_cost.py`）
+- **本日证据**：Day14 PR 草稿 `docs/pr-day14.md`（套模板；CI 红不合）
 - **待回写（9/12 后）**：实际结果（达成 / 部分达成 / 失败态出现几次）
 
 ## 主工具 / 备用工具
