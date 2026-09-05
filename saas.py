@@ -7,6 +7,7 @@ from billing import (
     PACK_PRICE_CNY,
     SIGNUP_CREDITS,
     consume_credit,
+    cost_sum_cny,
     get_user,
     load_store,
     register as billing_register,
@@ -81,7 +82,7 @@ def ask(token, question, faqs, store=None, path=None, mode="mock"):
             "refs": result.get("refs", []),
         }
 
-    consume_credit(token, store, reason="ask")
+    consume_credit(token, store, reason="ask", mode=mode)
     user = get_user(token, store)
     if path is not None:
         save_store(store, path)
@@ -115,4 +116,5 @@ def admin_snapshot(store=None, path=None):
         "users": users,
         "ledger_tail": store["ledger"][-8:],
         "user_count": len(users),
+        "cost_sum_cny": cost_sum_cny(store),
     }

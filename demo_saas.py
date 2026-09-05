@@ -55,7 +55,7 @@ def main():
     print(f"用户数={snap['user_count']} kill_switch={snap['kill_switch']}")
     for u in snap["users"]:
         print(f"  {u['email']} credits={u['credits']}")
-    print(f"账本尾 {len(snap['ledger_tail'])} 条")
+    print(f"账本尾 {len(snap['ledger_tail'])} 条 累计估算成本={snap['cost_sum_cny']}")
     print("\nSaaS 闭环演示通过。")
 
 

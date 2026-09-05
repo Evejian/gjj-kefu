@@ -5,10 +5,12 @@
 - 语义检索 / embedding：关键词重合度有天花板，但本期先用它跑通全链路
 - Web 界面 / 多轮对话 / 语音：非目标，延后
 - 真工单系统 / MCP / 向量检索：见 backlog
+- SSE / Web 流式输出（AGI Day13 网页部分）：CLI 成本账本已做；流式进本期不做
 
 ## 已闭环（2026-09-05）
 - ~~结营 L10~~：三份资产 `docs/camp-retro.md`；目标对照 `camp-goals.md`；`demo_wrap.py`
 - ~~营外 Day12 L4 试行包~~：`docs/l4-trial.md`；一周结果待 09-12 回写
+- ~~营外 Day13 成本入账~~：mock `cost_cny=0`；live 记 0.02；无 SSE
 
 ## 已闭环（2026-09-04）
 - ~~SaaS 最小商业闭环 L9~~：注册赠次、扣次问答、付费墙、假支付、kill switch、成本核算

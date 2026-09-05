@@ -12,6 +12,7 @@ COMMANDS = [
     ["python", "test_billing.py"],
     ["python", "test_wrap.py"],
     ["python", "test_trial.py"],
+    ["python", "test_cost.py"],
 ]
 
 

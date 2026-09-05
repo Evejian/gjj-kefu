@@ -13,7 +13,7 @@
 
 1. 收入：9.9 元 / 10 次 → 0.99 元/次标价  
 2. 变动成本（live）：约 0.02 元/次（flash）或 0.05（plus）  
-3. mock 演示成本：0  
+3. mock 演示成本：0（账本 `cost_cny=0`，见 `docs/spec-cost.md`）  
 4. 毛利（flash）：约 0.97 元/次  
 5. 免费赠送 3 次：成本 ≤ 0.15 元/用户（live）或 0（mock）  
 6. 破产开关：`GJJ_KILL_SWITCH=1` 拒绝一切 ask/pay  

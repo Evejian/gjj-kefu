@@ -11,6 +11,7 @@ python demo_saas.py             # 注册→耗次→付费墙→假付费
 python demo_agent.py            # 政策/Tool/转人工
 python demo_wrap.py             # 结营 8 分钟提纲 + 卖什么
 python demo_trial.py            # L4 公约一周试行一页纸
+python demo_cost.py             # mock 成本 0 / live 估算入账
 ```
 
 卖什么：见 `python -c "from saas import landing; print(landing())"`  
@@ -23,6 +24,7 @@ python demo_trial.py            # L4 公约一周试行一页纸
 - [x] L4–L9：公约 / 主路径 / Wiki / Agent / Issue→PR / 假付费
 - [x] **Day11 / L10**：三份资产 + 8 分钟讲稿（测试支付 ≠ 已盈利）
 - [x] **Day12 / 营外**：L4 公约一周试行包（不改生产仓、不强制换 Agent）
+- [x] **Day13 / 营外日历2**：规格先行 + mock 成本入账 0（无 SSE）
 
 ## 协作
 

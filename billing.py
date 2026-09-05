@@ -44,6 +44,20 @@ def save_store(store, path=None):
         json.dump(store, f, ensure_ascii=False, indent=2)
 
 
+def estimate_cost_cny(mode="mock"):
+    if mode == "live":
+        return COST_PER_ASK_CNY
+    return 0.0
+
+
+def cost_sum_cny(store):
+    total = 0.0
+    for row in store.get("ledger") or []:
+        if row.get("event") == "consume":
+            total += float(row.get("cost_cny") or 0)
+    return round(total, 4)
+
+
 def _append_ledger(store, event, **fields):
     row = {"at": _now(), "event": event, **fields}
     store["ledger"].append(row)
@@ -72,7 +86,7 @@ def get_user(token, store):
     return store["users"].get(token)
 
 
-def consume_credit(token, store, reason="ask"):
+def consume_credit(token, store, reason="ask", mode="mock"):
     user = get_user(token, store)
     if not user:
         return None
@@ -84,8 +98,9 @@ def consume_credit(token, store, reason="ask"):
         "consume",
         token=token,
         reason=reason,
+        mode=mode,
         credits_left=user["credits"],
-        cost_cny=COST_PER_ASK_CNY,
+        cost_cny=estimate_cost_cny(mode),
     )
     return user
 
