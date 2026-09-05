@@ -1,6 +1,6 @@
 # 公积金智能客服系统
 
-广州公积金政策快问：**检索 + Agent 值守 + Issue→PR + 最小商业闭环**（Day10）。
+广州公积金政策快问：**检索 + Agent 值守 + Issue→PR + 最小商业闭环**。结营稿：`docs/camp-retro.md`。
 
 ## 5 分钟跑通
 
@@ -9,15 +9,17 @@ pip install openai
 python scripts/gate_ready.py
 python demo_saas.py             # 注册→耗次→付费墙→假付费
 python demo_agent.py            # 政策/Tool/转人工
+python demo_wrap.py             # 结营 8 分钟提纲 + 卖什么
 ```
 
 卖什么：见 `python -c "from saas import landing; print(landing())"`  
-成本与下线：`docs/spec-saas.md`（`GJJ_KILL_SWITCH=1`）
+成本与下线：`docs/spec-saas.md`（`GJJ_KILL_SWITCH=1`）  
+目标对照：`camp-goals.md`（达成 / 部分达成 / 放弃）
 
 ## 当前状态
 
-- [x] L4–L8：公约 / 主路径 / Wiki / Agent / Issue→PR
-- [x] **Day10 / L9 适配**：注册赠次 → 问答扣次 → 墙 → 测试支付加减次 → 后台账本（无 Web、无真支付）
+- [x] L4–L9：公约 / 主路径 / Wiki / Agent / Issue→PR / 假付费
+- [x] **Day11 / L10**：三份资产 + 8 分钟讲稿（测试支付 ≠ 已盈利）
 
 ## 协作
 

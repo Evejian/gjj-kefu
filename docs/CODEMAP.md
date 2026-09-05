@@ -1,6 +1,6 @@
 # 仓库地图（CODEMAP）
 
-FAQ → 检索 → 回答；Agent 值守；Issue→PR；**按次计费 CLI SaaS**。
+FAQ → 检索 → 回答；Agent 值守；Issue→PR；按次计费 CLI SaaS；**结营复盘**。
 
 ## 关键入口
 
@@ -8,6 +8,7 @@ FAQ → 检索 → 回答；Agent 值守；Issue→PR；**按次计费 CLI SaaS*
 |----------|-------------|
 | 门禁 | `python scripts/gate_ready.py` |
 | 商业闭环演示 | `python demo_saas.py` |
+| 结营讲稿 | `python demo_wrap.py` / `docs/camp-retro.md` |
 | 计费逻辑 | `billing.py` / `payment_mock.py` / `saas.py` |
 | Agent | `demo_agent.py` |
 | 修 Issue | `/fix-issue` + `docs/issues/` |
@@ -16,5 +17,5 @@ FAQ → 检索 → 回答；Agent 值守；Issue→PR；**按次计费 CLI SaaS*
 
 ```
 python scripts/gate_ready.py
-python demo_saas.py && python demo_agent.py && python eval_run.py
+python demo_saas.py && python demo_agent.py && python demo_wrap.py && python eval_run.py
 ```

@@ -6,6 +6,9 @@
 - Web 界面 / 多轮对话 / 语音：非目标，延后
 - 真工单系统 / MCP / 向量检索：见 backlog
 
+## 已闭环（2026-09-05）
+- ~~结营 L10~~：三份资产 `docs/camp-retro.md`；目标对照 `camp-goals.md`；`demo_wrap.py`
+
 ## 已闭环（2026-09-04）
 - ~~SaaS 最小商业闭环 L9~~：注册赠次、扣次问答、付费墙、假支付、kill switch、成本核算
 - ~~Issue→PR L8~~：fix-issue skill、gate_ready、tickets 容错、Issue 0001 失败日志
